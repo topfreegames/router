@@ -1,0 +1,14 @@
+sudo: required
+env:
+  matrix:
+  - DOCKER_REGISTRY=quay.io DEIS_REGISTRY=${DOCKER_REGISTRY}/ IMAGE_PREFIX=tfgco
+  global:
+  - secure: C8KUHM46Oz2LbhwdHcZN7vuMDDgZmKSlsQCvpZbkSCZJow3bRPKTqENO46kRlvhxQGtSgEcwbi/n6WSFGSLy3jqwzbXj/8Ghr8tgAhFkTNc8lWds8KTsBjrfHZE+uyMF06SyZwpQmxxaJJgampq7fMgA4kIdsAgD3WVuCkMhZDplkd7VopJ+ooRi1WxlLKQVOJ66TntoMoNEqwCL/k2QD1l8nGXFILhQs3YI83tDmKwtkhzyxjfXmzZrEocB9mtbG9GV5mCG9Rl3HpyFWbwWFW2x+AFQcPIwFCo89bCxFnjYDX7ZvcIfu2V86rYftoPhItNObWLcnIb/gcx9uPcI5I+80V9kGPneOrWNPMjA82ZxUwS0b5QqgeFkzsg+I9Yqlmxo7qW2mixb9S7c0qlguQRab8QcdXoHH2tl1WfVfYePwWnxSeZCFuZ0C4b6ZflhvFCEc2RmIFdZfjxjEmCUD81o1OllcbtiOGnRRo1AYf1IX82mLMmvccCA2SlEKy10rJOU6Pnn332QTupyy5uO+cBIq8kV2f8qryKVFShX46YChJSXnwZ24efbDTaLYhN8tk1SeZcWMO9BBrBD+Z1XPNoBtIHJg+cqNMrkjHBdjWcHPoDBVGlAgF0YMFrihX86U8mxObnmDwxMlAZreOe/Jjnk9Ija5sLBal+7NZv9HBs=
+services:
+- docker
+script:
+- make bootstrap
+- make build test-style test-cover
+after_success:
+- docker login -u $DOCKER_USER -p $DOCKER_PASSWORD $DOCKER_REGISTRY
+- make docker-build docker-push

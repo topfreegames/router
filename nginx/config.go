@@ -202,12 +202,12 @@ http {
 		location ~ ^/stats/?$ {
 			vhost_traffic_status_display;
 			vhost_traffic_status_display_format json;
-			allow 127.0.0.1;
+			allow {{ $routerConfig.MonitoringCIDRorIP }};
 			deny all;
 		}
 	 	location /nginx_status {
       			stub_status on;
-		      	allow 127.0.0.1;
+				allow {{ $routerConfig.MonitoringCIDRorIP }};
 		      	deny all;
 		}
 		location / {

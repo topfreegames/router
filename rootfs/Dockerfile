@@ -14,13 +14,13 @@ RUN buildDeps='gcc make libgeoip-dev libssl-dev libpcre3-dev'; \
     apt-get install -y --no-install-recommends \
         $buildDeps \
         libgeoip1 && \
-    export NGINX_VERSION=1.13.12 SIGNING_KEY=A1C052F8 VTS_VERSION=0.1.18 BUILD_PATH=/tmp/build PREFIX=/opt/router && \
+    export NGINX_VERSION=1.13.4 SIGNING_KEY=A1C052F8 VTS_VERSION=0.1.18 BUILD_PATH=/tmp/build PREFIX=/opt/router && \
     rm -rf "$PREFIX" && \
     mkdir "$PREFIX" && \
     mkdir "$BUILD_PATH" && \
     cd "$BUILD_PATH" && \
-    get_src_gpg $SIGNING_KEY "http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz" && \
-    get_src c6f3733e9ff84bfcdc6bfb07e1baf59e72c4e272f06964dd0ed3a1bdc93fa0ca "https://github.com/vozlt/nginx-module-vts/archive/v$VTS_VERSION.tar.gz" && \
+    get_src de21f3c49ba65c611329d8759a63d72e5fcf719bc6f2a3270e2541348ef1fbba "http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz" && \
+    get_src 17ea41d4083f6d1ab1ab83dad9160eeca66867abe16c5a0421f85a39d7c84b65 "https://github.com/vozlt/nginx-module-vts/archive/v$VTS_VERSION.tar.gz" && \
     cd "$BUILD_PATH/nginx-$NGINX_VERSION" && \
     ./configure \
       --prefix="$PREFIX" \

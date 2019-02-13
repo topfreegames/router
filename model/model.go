@@ -469,6 +469,12 @@ func buildAppConfig(kubeClient *kubernetes.Clientset, service v1.Service, router
 		}
 	}
 	appConfig.ServiceIP = service.Spec.ClusterIP
+
+    // Skip no ClusterIP services
+    if appConfig.ServiceIP == "" {
+        return nil, nil
+    }
+
 	endpointsClient := kubeClient.Endpoints(service.Namespace)
 	endpoints, err := endpointsClient.Get(service.Name)
 	if err != nil {

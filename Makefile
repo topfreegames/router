@@ -49,6 +49,10 @@ docker-build: build check-docker
 	docker build ${DOCKER_BUILD_FLAGS} -t ${IMAGE} rootfs
 	docker tag ${IMAGE} ${MUTABLE_IMAGE}
 
+only-docker-build:
+	docker build ${DOCKER_BUILD_FLAGS} -t ${IMAGE} rootfs
+	docker tag ${IMAGE} ${MUTABLE_IMAGE}
+
 # Builds the binary-- this should only be executed within the
 # containerized development environment.
 binary-build:

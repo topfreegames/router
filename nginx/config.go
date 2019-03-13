@@ -151,7 +151,7 @@ http {
 			proxy_buffers {{ $routerConfig.ProxyBuffersConfig.Number }} {{ $routerConfig.ProxyBuffersConfig.Size }};
 			proxy_busy_buffers_size {{ $routerConfig.ProxyBuffersConfig.BusySize }};
 			proxy_set_header Host $host;
-			proxy_set_header X-Forwarded-For $remote_addr;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 			proxy_set_header X-Forwarded-Proto $access_scheme;
 			proxy_set_header X-Forwarded-Port $forwarded_port;
 			proxy_redirect off;
